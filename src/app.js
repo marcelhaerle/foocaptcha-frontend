@@ -4,7 +4,8 @@ const path = require('path')
 const morgan = require('morgan')
 const logger = require('./logger')
 const redis = require('./db/redis')
-const homeRoute = require('./routes/home')(redis)
+const homeRoute = require('./routes/home')
+const apiRoutes = require('./routes/api')(redis)
 
 const app = express()
 
@@ -12,10 +13,13 @@ app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'views'))
 
+app.use(express.static(path.join(__dirname, '..', 'public')))
+
 // Logging
 app.use(morgan('short', { stream: logger.stream }))
 
 app.use('/', homeRoute)
+app.use('/api', apiRoutes)
 
 // 404 handler
 app.use((req, res) => {
