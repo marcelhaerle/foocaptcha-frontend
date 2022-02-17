@@ -1,8 +1,10 @@
 const express = require('express')
-const { engine } = require('express-handlebars')
+const {engine} = require('express-handlebars')
 const path = require('path')
 const morgan = require('morgan')
 const logger = require('./logger')
+const redis = require('./db/redis')
+const homeRoute = require('./routes/home')(redis)
 
 const app = express()
 
@@ -13,7 +15,7 @@ app.set('views', path.join(__dirname, 'views'))
 // Logging
 app.use(morgan('short', { stream: logger.stream }))
 
-app.use('/', require('./routes/home'))
+app.use('/', homeRoute)
 
 // 404 handler
 app.use((req, res) => {

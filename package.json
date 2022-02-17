@@ -13,6 +13,7 @@
     "express": "^4.17.3",
     "express-handlebars": "^6.0.2",
     "morgan": "^1.10.0",
+    "redis": "^4.0.3",
     "winston": "^3.6.0"
   }
 }
