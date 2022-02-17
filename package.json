@@ -1,0 +1,11 @@
+{
+  "name": "foocaptcha-frontend",
+  "version": "0.0.1",
+  "private": true,
+  "description": "foocaptcha frontend application",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marcel Härle <marcel.haerle@sonnvest.de>",
+  "license": "MIT"
+}
