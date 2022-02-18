@@ -6,7 +6,6 @@
 </section>
 <section class="section">
     <div class="container">
-
         <div class="columns">
             <div class="column">
                 <div class="box has-background-primary has-text-light">
@@ -24,6 +23,51 @@
                 <div class="box has-background-success has-text-light">
                     <p class="is-size-4 has-text-weight-bold">Total captchas verified:</p>
                     <p class="is-size-1 has-text-weight-bold has-text-centered"><span id="totalVerified">&nbsp;</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <h2 class="is-size-2 has-text-weight-bold has-text-centered mb-6">Demo</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="box" style="width: 300px; margin: 10px auto">
+                    <figure class="image">
+                        <img id="imgChars" data-cid="{{captchaId}}" src="{{charsImgSrc}}" style="height: 100px" alt="Character Captcha"/>
+                    </figure>
+                    <div class="field mt-2">
+                        <label for="charsGuess" class="label">Your guess:</label>
+                        <div class="control">
+                            <input id="charsGuess" type="text" class="input">
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="is-success button" id="verifyCharsButton">Verify</button>
+                        <button class="is-info button" id="reloadCharsButton">Reload</button>
+                        <span id="charsVerifyResult" class="has-text-weight-bold ml-3 mb-2"></span>
+                    </div>
+                    <h1 class="has-text-centered title is-4">Classic</h1>
+                </div>
+            </div>
+            <div class="column">
+                <div class="box" style="width: 300px; margin: 10px auto">
+                    <figure class="image">
+                        <img id="imgEquation" data-cid="{{equationCaptchaId}}" src="{{equationImgSrc}}" style="height: 100px" alt="Equation Captcha"/>
+                    </figure>
+                    <div class="field mt-2">
+                        <label for="equationGuess" class="label">Your guess:</label>
+                        <div class="control">
+                            <input id="equationGuess" type="text" class="input">
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="is-success button" id="verifyEquationButton">Verify</button>
+                        <button class="is-info button" id="reloadEquationButton">Reload</button>
+                        <span id="equationVerifyResult" class="has-text-weight-bold ml-3 mb-2"></span>
+                    </div>
+                    <h1 class="has-text-centered title is-4">Equation</h1>
                 </div>
             </div>
         </div>
