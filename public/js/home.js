@@ -15,19 +15,27 @@ window.onload = function() {
     });
   };
 
+  // Five minutes in millis.
+  const FIVE_MINUTES = 5 * 60 * 1000;
+
   const charsGuess = $('#charsGuess');
   const imgChars = $('#imgChars');
   const reloadCharsButton = $('#reloadCharsButton');
   const verifyCharsButton = $('#verifyCharsButton');
   const charsVerifyResult = $('#charsVerifyResult');
+  let charCaptchaTimerId = null;
 
   const equationGuess = $('#equationGuess');
   const imgEquation = $('#imgEquation');
   const reloadEquationButton = $('#reloadEquationButton');
   const verifyEquationButton = $('#verifyEquationButton');
   const equationVerifyResult = $('#equationVerifyResult');
+  let equationCaptchaTimerId = null;
 
   const loadCharsCaptcha = () => {
+    if (charCaptchaTimerId) {
+      clearTimeout(charCaptchaTimerId);
+    }
     $.get('/api/chars').then(response => {
       imgChars
         .attr('src', response.url)
@@ -35,11 +43,16 @@ window.onload = function() {
       verifyCharsButton.attr('disabled', null);
       charsGuess.val('');
       charsVerifyResult.text('');
-      loadStats();
+      charCaptchaTimerId = setTimeout(() => {
+        loadCharsCaptcha();
+      }, FIVE_MINUTES);
     });
   };
 
   const loadEquationCaptcha = () => {
+    if (equationCaptchaTimerId) {
+      clearTimeout(equationCaptchaTimerId);
+    }
     $.get('/api/equation').then(response => {
       imgEquation
         .attr('src', response.url)
@@ -47,7 +60,9 @@ window.onload = function() {
       verifyEquationButton.attr('disabled', null);
       equationGuess.val('');
       equationVerifyResult.text('');
-      loadStats();
+      equationCaptchaTimerId = setTimeout(() => {
+        loadEquationCaptcha();
+      }, FIVE_MINUTES);
     });
   };
 
