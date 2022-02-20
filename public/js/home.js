@@ -15,6 +15,8 @@ window.onload = function() {
     });
   };
 
+  loadStats();
+
   // Five minutes in millis.
   const FIVE_MINUTES = 5 * 60 * 1000;
 
