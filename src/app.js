@@ -6,6 +6,7 @@ const logger = require('./logger')
 const redis = require('./db/redis')
 const homeRoute = require('./routes/home')
 const apiRoutes = require('./routes/api')(redis)
+const metrics = require('./metrics')
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'views'))
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use(metrics)
 
 // Logging
 app.use(morgan('short', { stream: logger.stream }))
