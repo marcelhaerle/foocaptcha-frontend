@@ -3,6 +3,17 @@ const router = express.Router()
 const axios = require('axios')
 
 const FC_URL = process.env.FC_URL
+const API_KEY = process.env.API_KEY
+
+axios.interceptors.request.use(
+  config => {
+    config.headers['Authorization'] = `Bearer ${API_KEY}`;
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+)
 
 const apiRouter = (redisClient) => {
   router.get('/stats', async (req, res) => {
