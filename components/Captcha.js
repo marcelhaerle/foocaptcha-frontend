@@ -52,7 +52,7 @@ export default function Captcha({ type, description }) {
 
     return (
       <figure className="image">
-        <Image src={captcha.src}  alt="Equation Captcha"/>
+        <Image src={captcha.src}  alt="Equation Captcha" width={300} height={100}/>
       </figure>
     )
   };
