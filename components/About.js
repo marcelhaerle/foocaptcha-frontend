@@ -6,7 +6,7 @@ export default function About() {
         <p className="block is-size-5">
           Do we need another one? Probably not, but we wanted to have our own that is open-source, free of charge and
           easy to use. And you are very welcome to use foocaptcha for your sites and applications too! Please help
-          us to improve and maintain the <a href="https://github.com/marcelhaerle/foocaptcha" target="_blank">code
+          us to improve and maintain the <a href="https://github.com/marcelhaerle/foocaptcha" target="_blank" rel="noreferrer">code
           base</a> or documentation. Everybody is welcome!
         </p>
         <p className="block is-size-5">

@@ -1,5 +1,6 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 import { CSpinner } from "@coreui/react";
+import Image from "next/image";
 
 export default function Captcha({ type, description }) {
 
@@ -51,7 +52,7 @@ export default function Captcha({ type, description }) {
 
     return (
       <figure className="image">
-        <img id="imgChars" src={captcha.src}  alt="Equation Captcha"/>
+        <Image src={captcha.src}  alt="Equation Captcha"/>
       </figure>
     )
   };

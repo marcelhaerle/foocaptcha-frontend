@@ -1,6 +1,6 @@
 const FC_URL = process.env.FC_URL;
 
-export default async (req, res) => {
+export default async function handle(req, res) {
   try {
     const { guess, id } = req.query;
     const response = await fetch(`${FC_URL}/api/v1/verify/${id}/${guess}`);
