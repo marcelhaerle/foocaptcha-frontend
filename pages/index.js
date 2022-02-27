@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Header from "../components/Header";
 import Stats from "../components/Stats";
 import About from "../components/About";
@@ -7,6 +8,10 @@ import redisClient from "../lib/redis";
 export default function HomePage({ stats }) {
   return (
     <>
+      <Head>
+        <title>| foocaptcha |</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Header />
       <Stats stats={stats}/>
       <About />
