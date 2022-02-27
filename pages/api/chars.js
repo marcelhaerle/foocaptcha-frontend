@@ -1,4 +1,4 @@
-import {log} from "../../lib/logger";
+import {log, logger} from "../../lib/logger";
 
 const FC_URL = process.env.FC_URL;
 const API_KEY = process.env.API_KEY;
@@ -20,6 +20,7 @@ const handler = async (req, res) => {
       res.status(response.status).json({message: response.statusText});
     }
   } catch (e) {
+    logger.error(e);
     res.status(500).json({message: e.message});
   }
 }

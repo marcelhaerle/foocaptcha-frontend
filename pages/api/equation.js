@@ -1,4 +1,4 @@
-import {log} from "../../lib/logger";
+import {log, logger} from "../../lib/logger";
 
 const FC_URL = process.env.FC_URL;
 const API_KEY = process.env.API_KEY;
@@ -9,7 +9,7 @@ const headers = {
 
 const handler = async (req, res) => {
   try {
-    const response = await fetch(`${FC_URL}/api/v1/equation`, { headers });
+    const response = await fetch(`${FC_URL}/api/v1/equation`, {headers});
     if (response.ok) {
       const json = await response.json();
       res.json({
@@ -17,10 +17,11 @@ const handler = async (req, res) => {
         src: `${FC_URL}/api/v1/captcha/${json.id}`
       });
     } else {
-      res.status(response.status).json({ message: response.statusText });
+      res.status(response.status).json({message: response.statusText});
     }
-  } catch(e) {
-    res.status(500).json({ message: e.message });
+  } catch (e) {
+    logger.error(e);
+    res.status(500).json({message: e.message});
   }
 }
 
