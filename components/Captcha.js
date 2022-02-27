@@ -10,11 +10,18 @@ export default function Captcha({ type, description }) {
   const [guess, setGuess] = useState('');
   const [verified, setVerified] = useState(null);
 
+  let timerId;
+
   useEffect(() => {
     loadEquationCaptcha();
   }, []);
 
   const loadEquationCaptcha = async () => {
+    if (timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+
     setLoading(true);
     setVerified(null);
     setGuess('');
@@ -24,6 +31,7 @@ export default function Captcha({ type, description }) {
         const json = await response.json();
         setCaptcha(json);
         setError(null);
+        timerId = setTimeout(loadEquationCaptcha, 300000);
       } else {
         setError(response.statusText);
       }
