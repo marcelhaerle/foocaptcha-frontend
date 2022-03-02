@@ -1,13 +1,39 @@
-import mongoPromise from "../lib/mongo";
-import redisClient from "../lib/redis";
-import {logger} from "../lib/logger";
-import {Container, Notification, Button} from "react-bulma-components";
+import {Button, Container, Notification} from "react-bulma-components";
 import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
+import {useEffect, useState} from "react";
+import Spinner from "../components/Spinner";
+import ErrorMessage from "../components/ErrorMessage";
 
-const Activate = ({apiKey, email}) => {
+const Activate = ({apiKey}) => {
+
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/activate?apiKey=${apiKey}`)
+      .then(response => {
+        if (response.ok) {
+          response.json().then(json => {
+            setLoading(false);
+            setEmail(json.email);
+          })
+        } else {
+          setLoading(false);
+        }
+      })
+      .catch(e => {
+        setLoading(false)
+        setError(e.message);
+      })
+  }, [])
+
   const getNotification = () => {
+    if (loading) return <div className="has-text-centered"><Spinner size="3x"/></div>;
+    if (error) return <ErrorMessage/>;
+
     if (email === null) {
       return <Notification color="danger" light={true}>Sorry we could not find your key :-/</Notification>;
     } else {
@@ -31,29 +57,10 @@ const Activate = ({apiKey, email}) => {
 }
 
 export async function getServerSideProps(context) {
-  const client = await mongoPromise;
-  const db = client.db(process.env.MONGODB_DATABASE);
-
   const apiKey = context.query['apiKey'] || null;
-  let email = null;
-
-  try {
-    email = await redisClient.get(`fc:keyRequest:${apiKey}`);
-
-    if (email !== null) {
-      // The 'subscriptions' collection uses the account email for the id!
-      const query = {_id: email};
-      const set = {apiKey: apiKey, verified: true, limitPerTenSeconds: 10};
-      await db.collection('subscriptions').updateOne(query, {$set: set}, {upsert: true});
-    }
-  } catch (e) {
-    logger.error(e);
-  }
-
   return {
     props: {
-      apiKey: apiKey,
-      email: email
+      apiKey
     }
   };
 }
