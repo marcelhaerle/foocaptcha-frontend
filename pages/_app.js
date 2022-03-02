@@ -1,5 +1,4 @@
 import 'bulma/css/bulma.min.css';
-import '@coreui/coreui/dist/css/coreui.min.css';
 import '../public/style.css';
 import Layout from "../components/Layout";
 import Head from "next/head";
