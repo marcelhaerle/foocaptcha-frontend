@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="footer has-background-info-light mt-4">
+    <footer className="footer has-background-info-light">
       <div className="content has-text-centered" style={{margin: '80px auto'}}>
         <p>
           <strong>foocaptcha</strong> by <a href="https://github.com/marcelhaerle" target="_blank" rel="noreferrer">Marcel</a>.

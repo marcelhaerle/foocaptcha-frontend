@@ -1,5 +1,22 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0 0 300px;
+}
+
 .center-horizontally {
     position: relative;
     top: 50%;
     transform: translate(0, -50%);
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 280px;
+    width: 100%;
 }

@@ -1,17 +1,17 @@
-import Header from "../components/Header";
 import Stats from "../components/Stats";
 import About from "../components/About";
 import Demo from "../components/Demo";
+import Signup from "../components/Signup";
 import redisClient from "../lib/redis";
 import {logger} from "../lib/logger";
 
 export default function HomePage({stats}) {
   return (
     <>
-      <Header/>
       <Stats stats={stats}/>
       <About/>
       <Demo/>
+      <Signup/>
     </>
   )
 }
